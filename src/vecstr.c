@@ -20,10 +20,10 @@ void vector_resize(vecstr* vec, int n){
     vec->cap = n;
 }
 
-void push_back(vecstr* vec, string str){
+void push_back(vecstr* vec, string* str){
     if(vec->size == vec->cap){
         vector_resize(vec, vec->cap * 2);
     }
-    vec->v[vec->size++] = *strcopy(&str);
+    vec->v[vec->size++] = *strcopy(str);
     return;
 }

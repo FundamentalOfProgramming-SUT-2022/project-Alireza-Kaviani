@@ -3,6 +3,7 @@
 
 #define ROOT    "./vimr"
 #define HIDDEN  "./vimr/.vim"
+#define OUTPUT  "/root/output"
 
 #include <stdio.h>
 #include <stdbool.h>

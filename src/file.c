@@ -1,12 +1,7 @@
 #include "file.h"
 #include <sys/stat.h>
 
-bool file_exists (string* path){
-    struct stat buffer;
-    return (stat(path->s, &buffer) == 0);
-}
-
-string* create_file(string* path, int hidden){
+string* get_path(string* path, int hidden){
     string* cur = create_string();
     string* res = create_string();
     for(int i = 1; i < path->size; i++){
@@ -22,6 +17,17 @@ string* create_file(string* path, int hidden){
         append(cur, path->s[i]);
     }
     res = concat(res, cur);
+    return res;
+}
+
+bool file_exists (string* path){
+    struct stat buffer;
+    return (stat(get_path(path, 0)->s, &buffer) == 0);
+}
+
+string* create_file(string* path, int hidden){
+    string* res = get_path(path, hidden);
     FILE* f = fopen(res->s, "w");
     fclose(f);
+    return res;
 }

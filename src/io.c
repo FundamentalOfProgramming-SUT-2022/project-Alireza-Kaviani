@@ -1,4 +1,5 @@
 #include "io.h"
+#include "command.h"
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -40,3 +41,33 @@ bool read_word(string* s){
     return 1;
 }
 
+bool read_command(FILE* f){
+    string* s = create_string();
+    command* cmd = create_command();
+    bool isname = true, isval = false;
+    while(read_word(s)){
+        if(isval && (s->s[0] == '-' || s->s[0] == '=')){
+            push_back(cmd->val, char_to_str("true"));
+            isval = false;
+        }
+        if(s->s[0] == '-'){
+            push_back(cmd->opt, s);
+            isval = true;
+        }
+        else if(isname){
+            cmd->name = s;
+            isname = false;
+        }
+        else if(isval){
+            push_back(cmd->val, s);
+        }
+        else{
+            push_back(cmd->oth, s);
+        }
+        s = create_string();
+    }
+    if(isval){
+        push_back(cmd->val, char_to_str("true"));
+    }
+    return run_command(f, cmd);
+}

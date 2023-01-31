@@ -10,6 +10,6 @@ typedef struct{
 
 vecstr* create_vecstr();
 void vector_resize(vecstr* vec, int n);
-void push_back(vecstr* vec, string str);
+void push_back(vecstr* vec, string* str);
 
 #endif

@@ -3,16 +3,15 @@
 #include "src/vecstr.h"
 #include "src/io.h"
 #include "src/file.h"
+#include "src/command.h"
+#include "src/commands/createfile.h"
 
 int main(){
-    string* s = char_to_str("aboc");
-    printstr(concat(s, s));
-    printstr(s);
-    s = create_string();
-    while(read_word(s)){
-        create_file(s, 0);
-        s = create_string();
-    }
+    string* path = create_file(char_to_str(OUTPUT), 1);
+    printstr(path);
+    FILE* f = fopen(path->s, "w");
+    read_command(f);
 
+    fclose(f);
     return 0;
 }
