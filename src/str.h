@@ -14,5 +14,6 @@ void append(string* str, char c);
 void printstr(string* str);
 string* strcopy(string* str);
 string* char_to_str(char* c);
+string* concat(string* A, string* B);
 
 #endif

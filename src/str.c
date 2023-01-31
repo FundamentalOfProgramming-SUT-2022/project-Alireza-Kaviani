@@ -48,3 +48,11 @@ string* char_to_str(char* c){
     }
     return s;
 }
+
+string* concat(string* A, string* B){
+    A = strcopy(A);
+    for(int i = 0; i < B->size; i++){
+        append(A, B->s[i]);
+    }
+    return A;
+}
