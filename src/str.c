@@ -27,7 +27,7 @@ void append(string* str, char c){
     str->s[str->size++] = c;
 }
 
-void print(string* str){
+void printstr(string* str){
     printf("%s\n", str->s);
 }
 
@@ -38,4 +38,13 @@ string* strcopy(string* str){
     res->size = str->size;
     res->cap = str->cap;
     return res;
+}
+
+string* char_to_str(char* c){
+    int n = strlen(c);
+    string* s = create_string();
+    for(int i = 0; i < n; i++){
+        append(s, c[i]);
+    }
+    return s;
 }

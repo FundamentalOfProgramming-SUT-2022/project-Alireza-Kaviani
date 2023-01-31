@@ -11,7 +11,8 @@ typedef struct{
 string* create_string();
 void str_resize(string* str, int n);
 void append(string* str, char c);
-void print(string* str);
+void printstr(string* str);
 string* strcopy(string* str);
+string* char_to_str(char* c);
 
 #endif
