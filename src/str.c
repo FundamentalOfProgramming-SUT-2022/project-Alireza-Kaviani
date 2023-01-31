@@ -1,11 +1,12 @@
 #include "str.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
 
 string* create_string(){
-    string* str = (string*) malloc(sizeof(string));
+    string* str = malloc(sizeof(string));
     str->s = calloc(INITSIZE, sizeof(char));
     str->cap = INITSIZE;
     str->size = 0;
