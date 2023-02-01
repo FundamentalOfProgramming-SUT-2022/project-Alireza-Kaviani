@@ -6,6 +6,6 @@
 #include "str.h"
 
 bool read_word(string* s);
-bool read_command(FILE* dst);
+bool read_command(FILE* outf);
 
 #endif

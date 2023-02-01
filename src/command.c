@@ -24,12 +24,12 @@ string* get_option(command* cmd, char* op){
     return create_string();
 }
 
-bool run_command(FILE* dst, command* cmd){
+bool run_command(FILE* outf, command* cmd){
     if(!strcmp(cmd->name->s, "createfile")){
-        return createfile(dst, cmd);
+        return run_createfile(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "cat")){
-        return cat(dst, cmd);
+        return run_cat(outf, cmd);
     }
     return true;
 }

@@ -27,8 +27,8 @@ void append(string* str, char c){
     str->s[str->size++] = c;
 }
 
-void printstr(string* str){
-    printf("%s\n", str->s);
+void printstr(FILE* outf, string* str){
+    fprintf(outf, "%s\n", str->s);
 }
 
 string* strcopy(string* str){

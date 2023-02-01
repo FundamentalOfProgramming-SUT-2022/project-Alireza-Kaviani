@@ -4,6 +4,7 @@
 #include "../file.h"
 #include "../command.h"
 
-bool cat(FILE* dst, command* cmd);
+bool cat(FILE* outf, string* path);
+bool run_cat(FILE* outf, command* cmd);
 
 #endif

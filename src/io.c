@@ -41,7 +41,7 @@ bool read_word(string* s){
     return 1;
 }
 
-bool read_command(FILE* dst){
+bool read_command(FILE* outf){
     string* s = create_string();
     command* cmd = create_command();
     bool isname = true, isval = false, isempty = true;
@@ -73,5 +73,5 @@ bool read_command(FILE* dst){
     if(isval){
         push_back(cmd->val, char_to_str("true"));
     }
-    return run_command(dst, cmd);
+    return run_command(outf, cmd);
 }
