@@ -4,6 +4,6 @@
 #include "../file.h"
 #include "../command.h"
 
-bool createfile(FILE* f, command* cmd);
+bool createfile(FILE* dst, command* cmd);
 
 #endif

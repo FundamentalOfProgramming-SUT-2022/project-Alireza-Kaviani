@@ -4,6 +4,8 @@
 
 #include "commands/createfile.h"
 
+#include "commands/cat.h"
+
 command* create_command(){
     command* cmd = malloc(sizeof(command));
     cmd->name = create_string();
@@ -22,9 +24,12 @@ string* get_option(command* cmd, char* op){
     return create_string();
 }
 
-bool run_command(FILE* f, command* cmd){
+bool run_command(FILE* dst, command* cmd){
     if(!strcmp(cmd->name->s, "createfile")){
-        return createfile(f, cmd);
+        return createfile(dst, cmd);
+    }
+    if(!strcmp(cmd->name->s, "cat")){
+        return cat(dst, cmd);
     }
     return true;
 }

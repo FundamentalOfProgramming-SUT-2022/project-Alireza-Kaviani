@@ -14,6 +14,6 @@ typedef struct{
 
 command* create_command();
 string* get_option(command* cmd, char* op);
-bool run_command(FILE* f, command* cmd);
+bool run_command(FILE* dst, command* cmd);
 
 #endif

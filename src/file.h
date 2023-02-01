@@ -9,9 +9,13 @@
 #include <stdbool.h>
 #include "str.h"
 
+string* get_path(string* path, int hidden);
 bool file_exists(string *path);
 string* create_file(string* path, int hidden);
-string* file_to_str(FILE* f);
-void print_file(FILE* f);
+bool open_file(FILE* dst, FILE** res, string* path, char* mode);
+
+void print_range(FILE* dst, FILE* src, int from, int to);
+void print_file(FILE* dst, FILE* src);
+string* file_to_str(FILE* src);
 
 #endif

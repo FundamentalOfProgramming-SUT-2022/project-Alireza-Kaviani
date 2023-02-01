@@ -20,9 +20,9 @@ string* get_path(string* path, int hidden){
     return res;
 }
 
-bool file_exists (string* path){
+bool file_exists(string* real_path){
     struct stat buffer;
-    return (stat(get_path(path, 0)->s, &buffer) == 0);
+    return (stat(real_path->s, &buffer) == 0);
 }
 
 string* create_file(string* path, int hidden){
@@ -30,4 +30,45 @@ string* create_file(string* path, int hidden){
     FILE* f = fopen(res->s, "w");
     fclose(f);
     return res;
+}
+
+bool open_file(FILE* dst, FILE** ret, string* path, char* mode){
+    string* cur = create_string();
+    string* res = create_string();
+    for(int i = 1; i < path->size; i++){
+        if(path->s[i] == '/'){
+            if(cur->s[0] != '/'){
+                cur = char_to_str(ROOT);
+            }
+            res = concat(res, cur);
+            if(!file_exists(res)){
+                fprintf(dst, "Directory doesn't exist\n");
+                return true;
+            }
+            cur = char_to_str("/");
+            continue;
+        }
+        append(cur, path->s[i]);
+    }
+    res = concat(res, cur);
+    if(!file_exists(res)){
+        fprintf(dst, "File doesn't exist\n");
+        return true;
+    }
+    *ret = fopen(res->s, mode);
+    return false;
+}
+
+void print_range(FILE* dst, FILE* src, int from, int to){
+    fseek(src, 0, SEEK_SET);
+    char c;
+    for(int i = 0; (c = fgetc(src)) != EOF; i++){
+        if(from <= i && (i < to || to == -1)){
+            fputc(c, dst);
+        }
+    }
+}
+
+void print_file(FILE* dst, FILE* src){
+    print_range(dst, src, 0, -1);
 }

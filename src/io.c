@@ -41,11 +41,12 @@ bool read_word(string* s){
     return 1;
 }
 
-bool read_command(FILE* f){
+bool read_command(FILE* dst){
     string* s = create_string();
     command* cmd = create_command();
-    bool isname = true, isval = false;
+    bool isname = true, isval = false, isempty = true;
     while(read_word(s)){
+        isempty = false;
         if(isval && (s->s[0] == '-' || s->s[0] == '=')){
             push_back(cmd->val, char_to_str("true"));
             isval = false;
@@ -66,8 +67,11 @@ bool read_command(FILE* f){
         }
         s = create_string();
     }
+    if(isempty){
+        return true;
+    }
     if(isval){
         push_back(cmd->val, char_to_str("true"));
     }
-    return run_command(f, cmd);
+    return run_command(dst, cmd);
 }

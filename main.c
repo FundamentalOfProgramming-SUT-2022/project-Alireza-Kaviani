@@ -7,11 +7,15 @@
 #include "src/commands/createfile.h"
 
 int main(){
-    string* path = create_file(char_to_str(OUTPUT), 1);
-    printstr(path);
-    FILE* f = fopen(path->s, "w");
-    read_command(f);
+    //string* path = create_file(char_to_str(OUTPUT), 1);
 
-    fclose(f);
+    //FILE* f = fopen(path->s, "w");
+    while(!read_command(stdout));
+    
+    /*fclose(f);
+    f = fopen(path->s, "r");
+    print_file(stdout, f);
+    fclose(f);*/
+
     return 0;
 }
