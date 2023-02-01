@@ -105,3 +105,20 @@ bool command_to_pos(FILE* outf, command *cmd, int* res){
     *res = pos_to_index(src, line, pos);
     return false;
 }
+
+bool command_to_range(FILE* outf, command *cmd, int* left, int* right){
+    int pos, size;
+    if(command_to_pos(outf, cmd, &pos)){
+        return true;
+    }
+    sscanf(get_option(cmd, "-size")->s, "%d", &size);
+    if(get_option(cmd, "-f")->size != 0){
+        *left = pos;
+        *right = pos + size;
+    }
+    else{
+        *right = pos + 1;
+        *left = pos - size + 1;
+    }
+    return false;
+}

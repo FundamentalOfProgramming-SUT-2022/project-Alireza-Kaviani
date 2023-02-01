@@ -5,6 +5,7 @@
 #include "commands/createfile.h"
 #include "commands/insertstr.h"
 #include "commands/cat.h"
+#include "commands/removestr.h"
 
 #include "commands/undo.h"
 
@@ -36,6 +37,9 @@ bool run_command(FILE* outf, command* cmd){
     if(!strcmp(cmd->name->s, "cat")){
         return run_cat(outf, cmd);
     }
+    if(!strcmp(cmd->name->s, "removestr")){
+        return run_removestr(outf, cmd);
+    }
     if(!strcmp(cmd->name->s, "undo")){
         return run_undo(outf, cmd);
     }
@@ -44,16 +48,16 @@ bool run_command(FILE* outf, command* cmd){
 
 /*
 createfile DONE
-insertstr
-cat
-removestr
+insertstr DONE
+cat DONE
+removestr DONE
 copystr
 cutstr
 pastestr
 find
 replace
 grep
-undo
+undo DONE
 auto-indent
 compare
 tree

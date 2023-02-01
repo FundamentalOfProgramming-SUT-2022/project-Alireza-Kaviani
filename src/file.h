@@ -22,5 +22,6 @@ void copy_file(string* src, string* dst);
 
 int pos_to_index(FILE* src, int line, int pos);
 bool command_to_pos(FILE* outf, command *cmd, int* res);
+bool command_to_range(FILE* outf, command *cmd, int* left, int* right);
 
 #endif

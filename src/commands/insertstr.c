@@ -9,6 +9,7 @@ bool insertstr(FILE* outf, string* path, string* str, int pos){
     fclose(src);
     fclose(dst);
     fprintf(outf, "Done\n");
+    return false;
 }
 
 bool run_insertstr(FILE* outf, command* cmd){
