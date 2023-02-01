@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #include "commands/createfile.h"
-
+#include "commands/insertstr.h"
 #include "commands/cat.h"
 
 command* create_command(){
@@ -27,6 +27,9 @@ string* get_option(command* cmd, char* op){
 bool run_command(FILE* outf, command* cmd){
     if(!strcmp(cmd->name->s, "createfile")){
         return run_createfile(outf, cmd);
+    }
+    if(!strcmp(cmd->name->s, "insertstr")){
+        return run_insertstr(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "cat")){
         return run_cat(outf, cmd);

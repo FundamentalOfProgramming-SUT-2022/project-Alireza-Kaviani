@@ -61,6 +61,7 @@ bool read_command(FILE* outf){
         }
         else if(isval){
             push_back(cmd->val, s);
+            isval = false;
         }
         else{
             push_back(cmd->oth, s);

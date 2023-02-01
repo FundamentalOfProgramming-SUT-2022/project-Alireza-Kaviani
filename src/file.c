@@ -59,12 +59,10 @@ bool check_file(FILE* outf, string* path){
 }
 
 void print_range(FILE* dst, FILE* src, int from, int to){
-    fseek(src, 0, SEEK_SET);
+    fseek(src, from, SEEK_SET);
     char c;
-    for(int i = 0; (c = fgetc(src)) != EOF; i++){
-        if(from <= i && (i < to || to == -1)){
-            fputc(c, dst);
-        }
+    for(int i = from; (c = fgetc(src)) != EOF && (i < to || to == -1); i++){
+        fputc(c, dst);
     }
 }
 
@@ -78,4 +76,32 @@ void copy_file(string* src, string* dst){
     print_file(dstf, srcf);
     fclose(dstf);
     fclose(srcf);
+}
+
+int pos_to_index(FILE* src, int line, int pos){
+    line--;
+    int idx = 0, L = 0, P = 0;
+    char c;
+    while((c = fgetc(src)) != EOF && (L < line || P < pos)){
+        if(c == '\n'){
+            L++; P = 0;
+        }
+        else{
+            P++;
+        }
+        idx++;
+    }
+    return idx;
+}
+
+bool command_to_pos(FILE* outf, command *cmd, int* res){
+    string* path = get_option(cmd, "--file");
+    if(check_file(outf, path)){
+        return true;
+    }
+    int line, pos;
+    sscanf(get_option(cmd, "--pos")->s, "%d:%d", &line, &pos);
+    FILE* src = fopen(get_path(path, 0)->s, "r");
+    *res = pos_to_index(src, line, pos);
+    return false;
 }

@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "str.h"
+#include "command.h"
 
 string* get_path(string* path, int hidden);
 bool file_exists(string *path);
@@ -17,7 +18,9 @@ bool check_file(FILE* outf, string* path);
 void print_range(FILE* dst, FILE* src, int from, int to);
 void print_file(FILE* dst, FILE* src);
 string* file_to_str(FILE* src);
-
 void copy_file(string* src, string* dst);
+
+int pos_to_index(FILE* src, int line, int pos);
+bool command_to_pos(FILE* outf, command *cmd, int* res);
 
 #endif
