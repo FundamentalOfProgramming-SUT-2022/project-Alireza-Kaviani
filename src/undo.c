@@ -28,3 +28,18 @@ void get_src_dst(FILE** src, FILE** dst, string* path){
     *src = fopen(hidden->s, "r");
     *dst = fopen(get_path(path, 0)->s, "w");
 }
+
+void undo(string* path){
+    string* hidden = get_path(path, 1);
+    append(hidden, '_');
+    int cnt = count_backups(hidden);
+    if(cnt == 0){
+        return;
+    }
+    copy_file(concat(hidden, int_to_str(1)), get_path(path, 0));
+    for(int i = 1; i < cnt; i++){
+        string* src = concat(hidden, int_to_str(i + 1));
+        string* dst = concat(hidden, int_to_str(i));
+        copy_file(src, dst);
+    }
+}

@@ -6,6 +6,8 @@
 #include "commands/insertstr.h"
 #include "commands/cat.h"
 
+#include "commands/undo.h"
+
 command* create_command(){
     command* cmd = malloc(sizeof(command));
     cmd->name = create_string();
@@ -33,6 +35,9 @@ bool run_command(FILE* outf, command* cmd){
     }
     if(!strcmp(cmd->name->s, "cat")){
         return run_cat(outf, cmd);
+    }
+    if(!strcmp(cmd->name->s, "undo")){
+        return run_undo(outf, cmd);
     }
     return true;
 }
