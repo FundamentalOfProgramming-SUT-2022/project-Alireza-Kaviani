@@ -17,7 +17,6 @@ bool run_removestr(FILE* outf, command* cmd){
         return true;
     }
     string* path = get_option(cmd, "--file");
-    string* str = get_option(cmd, "--str");
     removestr(outf, path, left, right);
     return false;
 }

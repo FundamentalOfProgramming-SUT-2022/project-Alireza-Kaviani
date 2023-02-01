@@ -1,9 +1,10 @@
 #ifndef FILE_H
 #define FILE_H
 
-#define ROOT    "./vimr"
-#define HIDDEN  "./vimr/.vim"
-#define OUTPUT  "/root/output"
+#define ROOT        "./vimr"
+#define HIDDEN      "./vimr/.vim"
+#define OUTPUT      "/root/output.vim"
+#define CLIPBOARD   "/root/clipboard.vim"
 
 #include <stdio.h>
 #include <stdbool.h>

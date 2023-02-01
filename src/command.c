@@ -6,6 +6,7 @@
 #include "commands/insertstr.h"
 #include "commands/cat.h"
 #include "commands/removestr.h"
+#include "commands/copystr.h"
 
 #include "commands/undo.h"
 
@@ -39,6 +40,9 @@ bool run_command(FILE* outf, command* cmd){
     }
     if(!strcmp(cmd->name->s, "removestr")){
         return run_removestr(outf, cmd);
+    }
+    if(!strcmp(cmd->name->s, "copystr")){
+        return run_copystr(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "undo")){
         return run_undo(outf, cmd);

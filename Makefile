@@ -10,7 +10,15 @@ test: build
 	rm -rf vimr/tests
 	rm -rf vimr/.vim/tests
 	for i in tests/*.txt ; do \
-        echo $$i ; \
-		./main.o < $$i ; \
+		name=$${i%.txt} ; \
+        echo "Test $$name" ; \
+		./main.o < $$i > $$name.out ; \
+		diff $$name.out $$name.ans > /dev/null ; \
+		if [ $$? -eq 0 ]; then\
+			echo "OK $$name" ; \
+		else \
+			cat $$name.out ; \
+		fi ; \
 		echo "=======" ; \
-	done
+	done ; \
+	rm -rf tests/*.out
