@@ -1,6 +1,8 @@
 #ifndef STR_H
 #define STR_H
 
+#include <stdio.h>
+
 typedef struct{
     char *s;
     int cap, size;
@@ -15,5 +17,6 @@ void printstr(FILE* outf, string* str);
 string* strcopy(string* str);
 string* char_to_str(char* c);
 string* concat(string* A, string* B);
+string* int_to_str(int x);
 
 #endif

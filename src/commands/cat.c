@@ -1,10 +1,10 @@
 #include "cat.h"
 
 bool cat(FILE* outf, string* path){
-    FILE* src;
-    if(open_file(outf, &src, path, "r")){
+    if(check_file(outf, path)){
         return true;
     }
+    FILE* src = fopen(get_path(path, 0)->s, "r");
     print_file(outf, src);
     return false;
 }

@@ -8,6 +8,7 @@ run:
 
 test: build
 	rm -rf vimr/tests
+	rm -rf vimr/.vim/tests
 	for i in tests/*.txt ; do \
         echo $$i ; \
 		./main.o < $$i ; \

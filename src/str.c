@@ -56,3 +56,9 @@ string* concat(string* A, string* B){
     }
     return A;
 }
+
+string* int_to_str(int x){
+    char* c = calloc(INITSIZE, sizeof(char));
+    sprintf(c, "%d", x);
+    return char_to_str(c);
+}

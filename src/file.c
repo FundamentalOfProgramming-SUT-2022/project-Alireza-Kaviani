@@ -32,7 +32,7 @@ string* create_file(string* path, int hidden){
     return res;
 }
 
-bool open_file(FILE* outf, FILE** ret, string* path, char* mode){
+bool check_file(FILE* outf, string* path){
     string* cur = create_string();
     string* res = create_string();
     for(int i = 1; i < path->size; i++){
@@ -55,20 +55,27 @@ bool open_file(FILE* outf, FILE** ret, string* path, char* mode){
         fprintf(outf, "File doesn't exist\n");
         return true;
     }
-    *ret = fopen(res->s, mode);
     return false;
 }
 
-void print_range(FILE* outf, FILE* src, int from, int to){
+void print_range(FILE* dst, FILE* src, int from, int to){
     fseek(src, 0, SEEK_SET);
     char c;
     for(int i = 0; (c = fgetc(src)) != EOF; i++){
         if(from <= i && (i < to || to == -1)){
-            fputc(c, outf);
+            fputc(c, dst);
         }
     }
 }
 
-void print_file(FILE* outf, FILE* src){
-    print_range(outf, src, 0, -1);
+void print_file(FILE* dst, FILE* src){
+    print_range(dst, src, 0, -1);
+}
+
+void copy_file(string* src, string* dst){
+    FILE* srcf = fopen(src->s, "r");
+    FILE* dstf = fopen(dst->s, "w");
+    print_file(dstf, srcf);
+    fclose(dstf);
+    fclose(srcf);
 }
