@@ -22,6 +22,8 @@ bool read_word(string* s){
                 append(s, '\n');
             else if(c == 't')
                 append(s, '\t');
+            else if(c == '*')
+                append(s, '`');
             else
                 append(s, c);
             bs = false;

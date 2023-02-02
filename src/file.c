@@ -131,3 +131,19 @@ bool command_to_range(FILE* outf, command *cmd, int* left, int* right){
     }
     return false;
 }
+
+int get_word_index(string* path, int pos){
+    FILE* src = fopen(get_path(path, 0)->s, "r");
+    int res = 1, prv = 0;
+    char c;
+    for(int i = 0; i <= pos && (c = fgetc(src)) != EOF; i++){
+        if(c == ' ' || c == '\n'){
+            prv = 1;
+            continue;
+        }
+        res += prv;
+        prv = 0;
+    }
+    fclose(src);
+    return res;
+}

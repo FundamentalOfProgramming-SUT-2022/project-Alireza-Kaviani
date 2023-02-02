@@ -9,6 +9,7 @@
 #include "commands/copystr.h"
 #include "commands/cutstr.h"
 #include "commands/pastestr.h"
+#include "commands/find.h"
 
 #include "commands/undo.h"
 #include "commands/autoindent.h"
@@ -52,6 +53,9 @@ bool run_command(FILE* outf, command* cmd){
     }
     if(!strcmp(cmd->name->s, "pastestr")){
         return run_pastestr(outf, cmd);
+    }
+    if(!strcmp(cmd->name->s, "find")){
+        return run_find(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "undo")){
         return run_undo(outf, cmd);

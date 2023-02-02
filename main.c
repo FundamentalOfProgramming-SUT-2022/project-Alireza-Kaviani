@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/stat.h>
 #include "src/vecstr.h"
 #include "src/io.h"
