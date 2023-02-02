@@ -28,8 +28,13 @@ void update(pattern* ptrn, char c, int ind){
     int* newdp = calloc(n + 1, sizeof(int));
     fill(newdp, newdp + n + 1, INT_MAX);
     for(int i = 1; i <= n; i++){
+        if(ptrn->expr->s[i - 1] == '*'){
+            newdp[i] = newdp[i - 1];
+        }
         if(matches(ptrn->expr->s[i - 1], c)){
-            newdp[i] = ptrn->dp[i - 1];
+            if(newdp[i] > ptrn->dp[i - 1]){
+                newdp[i] = ptrn->dp[i - 1];
+            }
             if(ptrn->expr->s[i - 1] == '*' && newdp[i] > ptrn->dp[i]){
                 newdp[i] = ptrn->dp[i];
             }
