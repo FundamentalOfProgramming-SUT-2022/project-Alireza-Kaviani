@@ -112,6 +112,7 @@ bool command_to_pos(FILE* outf, command *cmd, int* res){
     sscanf(get_option(cmd, "--pos")->s, "%d:%d", &line, &pos);
     FILE* src = fopen(get_path(path, 0)->s, "r");
     *res = pos_to_index(src, line, pos);
+    fclose(src);
     return false;
 }
 

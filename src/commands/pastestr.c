@@ -9,6 +9,7 @@ bool pastestr(FILE* outf, string* path, int pos){
     print_range(dst, src, pos, -1);
     fclose(src);
     fclose(dst);
+    fclose(clip);
     if(outf != NULL)
         fprintf(outf, "Done\n");
     return false;

@@ -49,7 +49,10 @@ bool run_find(FILE* outf, command* cmd){
         return true;
     }
     string* expr = get_option(cmd, "--str");
-    int type = -1; // pos:at, -1:count, -2:all 
+    int type = 1; // pos:at, -1:count, -2:all
+    if(get_option(cmd, "-count")->size != 0){
+        type = -1;
+    }
     if(get_option(cmd, "-all")->size != 0){
         type = -2;
     }

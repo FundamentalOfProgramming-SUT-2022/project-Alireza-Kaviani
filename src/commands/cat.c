@@ -6,6 +6,7 @@ bool cat(FILE* outf, string* path){
     }
     FILE* src = fopen(get_path(path, 0)->s, "r");
     print_file(outf, src);
+    fclose(src);
     return false;
 }
 
