@@ -11,6 +11,7 @@
 #include "commands/pastestr.h"
 
 #include "commands/undo.h"
+#include "commands/autoindent.h"
 
 command* create_command(){
     command* cmd = malloc(sizeof(command));
@@ -55,6 +56,9 @@ bool run_command(FILE* outf, command* cmd){
     if(!strcmp(cmd->name->s, "undo")){
         return run_undo(outf, cmd);
     }
+    if(!strcmp(cmd->name->s, "auto-indent")){
+        return run_autoindent(outf, cmd);
+    }
     return true;
 }
 
@@ -63,9 +67,9 @@ createfile DONE
 insertstr DONE
 cat DONE
 removestr DONE
-copystr
-cutstr
-pastestr
+copystr DONE
+cutstr DONE
+pastestr DONE
 find
 replace
 grep
