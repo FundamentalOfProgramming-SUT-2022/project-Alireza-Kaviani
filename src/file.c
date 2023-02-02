@@ -78,6 +78,15 @@ void copy_file(string* src, string* dst){
     fclose(srcf);
 }
 
+string* file_to_str(FILE* src){
+    string* res = create_string();
+    char c;
+    while((c = fgetc(src)) != EOF){
+        append(res, c);
+    }
+    return res;
+}
+
 int pos_to_index(FILE* src, int line, int pos){
     line--;
     int idx = 0, L = 0, P = 0;

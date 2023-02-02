@@ -1,5 +1,6 @@
 #include "io.h"
 #include "command.h"
+#include "file.h"
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -47,7 +48,18 @@ bool read_command(FILE* outf){
             push_back(cmd->val, char_to_str("true"));
             isval = false;
         }
-        if(s->s[0] == '-'){
+        if(s->s[0] == '='){
+            FILE* output = fopen(get_path(char_to_str(OUTPUT), 1)->s, "w");
+            run_command(output, cmd);
+            fclose(output);
+            output = fopen(get_path(char_to_str(OUTPUT), 1)->s, "r");
+            cmd = create_command();
+            push_back(cmd->opt, char_to_str("--str"));
+            push_back(cmd->val, file_to_str(output));
+            isname = true;
+            fclose(output);
+        }
+        else if(s->s[0] == '-'){
             push_back(cmd->opt, s);
             isval = true;
         }
