@@ -6,7 +6,8 @@ bool copystr(FILE* outf, string* path, int left, int right){
     print_range(dst, src, left, right);
     fclose(src);
     fclose(dst);
-    fprintf(outf, "Done\n");
+    if(outf != NULL)
+        fprintf(outf, "Done\n");
     return false;
 }
 

@@ -1,5 +1,5 @@
-#ifndef copystr_H
-#define copystr_H
+#ifndef COPYSTR_H
+#define COPYSTR_H
 
 #include "../file.h"
 #include "../command.h"

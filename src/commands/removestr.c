@@ -7,7 +7,8 @@ bool removestr(FILE* outf, string* path, int left, int right){
     print_range(dst, src, right, -1);
     fclose(src);
     fclose(dst);
-    fprintf(outf, "Done\n");
+    if(outf != NULL)
+        fprintf(outf, "Done\n");
     return false;
 }
 

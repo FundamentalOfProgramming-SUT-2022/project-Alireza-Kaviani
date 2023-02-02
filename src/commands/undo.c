@@ -7,6 +7,7 @@ bool run_undo(FILE* outf, command* cmd){
         return true;
     }
     undo(path);
-    fprintf(outf, "Done\n");
+    if(outf != NULL)
+        fprintf(outf, "Done\n");
     return false;
 }
