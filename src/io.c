@@ -52,7 +52,9 @@ bool read_command(FILE* outf){
         }
         if(s->s[0] == '='){
             FILE* output = fopen(get_path(char_to_str(OUTPUT), 1)->s, "w");
-            run_command(output, cmd);
+            if(run_command(output, cmd)){
+                return run_command(outf, cmd);
+            }
             fclose(output);
             output = fopen(get_path(char_to_str(OUTPUT), 1)->s, "r");
             cmd = create_command();

@@ -11,7 +11,7 @@
 #include "commands/pastestr.h"
 #include "commands/find.h"
 #include "commands/replace.h"
-
+#include "commands/grep.h"
 #include "commands/undo.h"
 #include "commands/autoindent.h"
 
@@ -60,6 +60,9 @@ bool run_command(FILE* outf, command* cmd){
     }
     if(!strcmp(cmd->name->s, "replace")){
         return run_replace(outf, cmd);
+    }
+    if(!strcmp(cmd->name->s, "grep")){
+        return run_grep(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "undo")){
         return run_undo(outf, cmd);
