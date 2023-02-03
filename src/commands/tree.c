@@ -1,12 +1,8 @@
 #include "tree.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <errno.h>
 #include <string.h>
 #include <dirent.h>
+#include <limits.h>
+#include <stdlib.h>
 
 void print_tree(FILE* outf, string* path, int maxdepth, int depth){
     if(depth > maxdepth){
@@ -47,6 +43,17 @@ bool tree(FILE* outf, string* path, int maxdepth){
 
 bool run_tree(FILE* outf, command* cmd){
     string* path = char_to_str(ROOT);
-    int maxdepth = atoi(cmd->oth->v[0].s);
+    int maxdepth;
+    if(cmd->opt->size > 0){
+        maxdepth = atoi(cmd->opt->v[0].s);
+        if(maxdepth < -1){
+            fprintf(outf, "Invalid depth\n");
+            return true;
+        }
+        maxdepth = INT_MAX;
+    }
+    else{
+        maxdepth = atoi(cmd->oth->v[0].s);
+    }
     return tree(outf, path, maxdepth);
 }
