@@ -7,6 +7,7 @@
 #include "src/command.h"
 #include "src/commands/createfile.h"
 #include "src/undo.h"
+#include "src/commands/tree.h"
 
 int main(){
     //string* path = create_file(char_to_str(OUTPUT), 1);

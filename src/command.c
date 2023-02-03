@@ -15,6 +15,8 @@
 #include "commands/undo.h"
 #include "commands/autoindent.h"
 
+#include "commands/tree.h"
+
 command* create_command(){
     command* cmd = malloc(sizeof(command));
     cmd->name = create_string();
@@ -69,6 +71,9 @@ bool run_command(FILE* outf, command* cmd){
     }
     if(!strcmp(cmd->name->s, "auto-indent")){
         return run_autoindent(outf, cmd);
+    }
+    if(!strcmp(cmd->name->s, "tree")){
+        return run_tree(outf, cmd);
     }
     return true;
 }
