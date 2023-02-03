@@ -148,3 +148,17 @@ int get_word_index(string* path, int pos){
     fclose(src);
     return res;
 }
+
+vecstr* readlines(FILE* src){
+    vecstr* res = create_vecstr();
+    char c;
+    while((c = fgetc(src)) != EOF){
+        string* str = create_string();
+        while(c != '\n' && c != EOF){
+            append(str, c);
+            c = fgetc(src);
+        }
+        push_back(res, str);
+    }
+    return res;
+}

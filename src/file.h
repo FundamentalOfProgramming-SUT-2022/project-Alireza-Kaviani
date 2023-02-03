@@ -27,4 +27,6 @@ bool command_to_range(FILE* outf, command *cmd, int* left, int* right);
 
 int get_word_index(string* path, int pos);
 
+vecstr* readlines(FILE* src);
+
 #endif

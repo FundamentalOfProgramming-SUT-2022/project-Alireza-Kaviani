@@ -14,7 +14,7 @@
 #include "commands/grep.h"
 #include "commands/undo.h"
 #include "commands/autoindent.h"
-
+#include "commands/compare.h"
 #include "commands/tree.h"
 
 command* create_command(){
@@ -71,6 +71,9 @@ bool run_command(FILE* outf, command* cmd){
     }
     if(!strcmp(cmd->name->s, "auto-indent")){
         return run_autoindent(outf, cmd);
+    }
+    if(!strcmp(cmd->name->s, "compare")){
+        return run_compare(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "tree")){
         return run_tree(outf, cmd);
