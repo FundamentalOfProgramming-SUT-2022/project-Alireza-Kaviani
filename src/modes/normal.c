@@ -1,6 +1,7 @@
 #include "normal.h"
 #include "../commands/autoindent.h"
 #include "../undo.h"
+#include "../commands/pastestr.h"
 
 void normal_mode(window* win){
     char c = read_char(win);
@@ -32,9 +33,17 @@ void normal_mode(window* win){
     }
     if(c == '='){
         autoindent(stdout, win->path);
+        win->issaved = false;
         return;
     }
     if(c == 'u'){
         undo(win);
+    }
+    if(c == 'p'){
+        FILE* src = fopen(get_path(char_to_str(OPENFILE), 1)->s, "r");
+        int pos = pos_to_index(src, win->line, win->pos);
+        fclose(src);
+        pastestr(NULL, win->path, pos);
+        win->issaved = false;
     }
 }
