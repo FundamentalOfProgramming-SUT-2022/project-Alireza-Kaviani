@@ -18,6 +18,7 @@
 #include "commands/autoindent.h"
 #include "commands/compare.h"
 #include "commands/tree.h"
+#include "commands/save.h"
 
 command* create_command(){
     command* cmd = malloc(sizeof(command));
@@ -39,7 +40,7 @@ string* get_option(command* cmd, char* op){
     return create_string();
 }
 
-bool run_command(FILE* outf, command* cmd){
+bool run_command(FILE* outf, window* win, command* cmd){
     if(!strcmp(cmd->name->s, "createfile")){
         return run_createfile(outf, cmd);
     }
@@ -81,6 +82,9 @@ bool run_command(FILE* outf, command* cmd){
     }
     if(!strcmp(cmd->name->s, "tree")){
         return run_tree(outf, cmd);
+    }
+    if(!strcmp(cmd->name->s, "save")){
+        return run_save(outf, win, cmd);
     }
     return true;
 }

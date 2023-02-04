@@ -1,8 +1,8 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
-#include "file.h"
 #include <ncurses.h>
+#include "str.h"
 
 typedef enum{
     NORMAL,

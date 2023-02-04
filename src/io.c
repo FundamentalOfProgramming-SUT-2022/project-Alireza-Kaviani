@@ -94,5 +94,5 @@ bool read_command(FILE* outf, window* win){
     if(isval){
         push_back(cmd->val, char_to_str("true"));
     }
-    return run_command(outf, cmd);
+    return run_command(outf, win, cmd);
 }

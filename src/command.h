@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "vecstr.h"
+#include "editor.h"
 
 typedef struct{
     string* name;
@@ -14,6 +15,6 @@ typedef struct{
 
 command* create_command();
 string* get_option(command* cmd, char* op);
-bool run_command(FILE* outf, command* cmd);
+bool run_command(FILE* outf, window* win, command* cmd);
 
 #endif

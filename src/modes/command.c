@@ -1,4 +1,5 @@
 #include "command.h"
+#include "../file.h"
 #include "../io.h"
 
 void command_mode(window* win){

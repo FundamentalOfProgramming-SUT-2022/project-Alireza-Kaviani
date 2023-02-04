@@ -9,7 +9,8 @@ int count_backups(string* path){
     return cnt - 1;
 }
 
-void save(string* path){
+void save(window* win){
+    string* path = win->path;
     string* hidden = get_path(path, 1);
     append(hidden, '_');
     int cnt = count_backups(hidden);
@@ -19,6 +20,8 @@ void save(string* path){
         copy_file(src, dst);
     }
     copy_file(get_path(path, 0), concat(hidden, int_to_str(1)));
+    copy_file(get_path(char_to_str(OPENFILE), 1), get_path(path, 0));
+    win->issaved = true;
 }
 
 void get_src_dst(FILE** src, FILE** dst, string* path){
