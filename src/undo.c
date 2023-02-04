@@ -32,7 +32,13 @@ void get_src_dst(FILE** src, FILE** dst, string* path){
     *dst = fopen(open->s, "w");
 }
 
-void undo(string* path){
+void undo(window* win){
+    string* path = win->path;
+    copy_file(get_path(path, 0), get_path(char_to_str(OPENFILE), 1));
+    win->issaved = true;
+    FILE* src = fopen(get_path(char_to_str(OPENFILE), 1)->s, "r");
+    get_valid_pos(src, &win->line, &win->pos);
+    fclose(src);
     string* hidden = get_path(path, 1);
     append(hidden, '_');
     int cnt = count_backups(hidden);

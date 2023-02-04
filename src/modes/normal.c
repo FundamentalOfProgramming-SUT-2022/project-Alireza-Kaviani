@@ -1,5 +1,6 @@
 #include "normal.h"
 #include "../commands/autoindent.h"
+#include "../undo.h"
 
 void normal_mode(window* win){
     char c = read_char(win);
@@ -24,5 +25,8 @@ void normal_mode(window* win){
     if(c == '='){
         autoindent(stdout, win->path);
         return;
+    }
+    if(c == 'u'){
+        undo(win);
     }
 }

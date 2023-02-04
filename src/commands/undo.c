@@ -1,13 +1,7 @@
 #include "undo.h"
 #include "../undo.h"
 
-bool run_undo(FILE* outf, command* cmd){
-    string *path = get_option(cmd, "--file");
-    if(check_file(outf, path)){
-        return true;
-    }
-    undo(path);
-    if(outf != NULL)
-        fprintf(outf, "Done\n");
+bool run_undo(FILE* outf, window* win){
+    undo(win);
     return false;
 }

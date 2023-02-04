@@ -3,7 +3,8 @@
 
 #include "../file.h"
 #include "../command.h"
+#include "../editor.h"
 
-bool run_undo(FILE* outf, command* cmd);
+bool run_undo(FILE* outf, window* win);
 
 #endif

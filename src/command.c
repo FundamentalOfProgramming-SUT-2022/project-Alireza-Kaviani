@@ -73,7 +73,7 @@ bool run_command(FILE* outf, window* win, command* cmd){
         return run_grep(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "undo")){
-        return run_undo(outf, cmd);
+        return run_undo(outf, win);
     }
     if(!strcmp(cmd->name->s, "auto-indent")){
         return run_autoindent(outf, cmd);

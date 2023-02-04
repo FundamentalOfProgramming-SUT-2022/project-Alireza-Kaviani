@@ -8,6 +8,6 @@
 int count_backups(string* path);
 void save(window* path);
 void get_src_dst(FILE** src, FILE** dst, string* path);
-void undo(string* path);
+void undo(window* win);
 
 #endif
