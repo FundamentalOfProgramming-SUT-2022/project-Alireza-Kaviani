@@ -7,4 +7,5 @@ void command_mode(window* win){
     read_command(outf, win);
     fclose(outf);
     win->mode = NORMAL;
+    win->command = create_string();
 }

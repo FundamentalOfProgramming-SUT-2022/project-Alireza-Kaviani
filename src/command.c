@@ -19,6 +19,7 @@
 #include "commands/compare.h"
 #include "commands/tree.h"
 #include "commands/save.h"
+#include "commands/saveas.h"
 
 command* create_command(){
     command* cmd = malloc(sizeof(command));
@@ -85,6 +86,9 @@ bool run_command(FILE* outf, window* win, command* cmd){
     }
     if(!strcmp(cmd->name->s, "save")){
         return run_save(outf, win, cmd);
+    }
+    if(!strcmp(cmd->name->s, "saveas")){
+        return run_saveas(outf, win, cmd);
     }
     return true;
 }
