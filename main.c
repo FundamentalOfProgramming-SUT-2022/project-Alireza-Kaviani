@@ -5,7 +5,7 @@
 #include "src/file.h"
 #include "src/editor.h"
 
-int main(){
+int main(int argc, char* argv[]){
     mkdir(ROOT, 0777);
     //while(!read_command(stdout));
 
@@ -34,7 +34,7 @@ int main(){
     endwin();*/
 
     init_window();
-    window* win = create_window(char_to_str("/root/guitest.c"));
+    window* win = create_window(char_to_str(argv[1]));
 
     mainloop(win);
     endwin();

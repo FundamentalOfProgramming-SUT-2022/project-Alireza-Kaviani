@@ -22,6 +22,9 @@ void init_window(){
 
 window* create_window(string* path){
     window* res = malloc(sizeof(window));
+    if(!file_exists(get_path(path, 0))){
+        create_file(path, 0);
+    }
     copy_file(get_path(path, 0), get_path(char_to_str(OPENFILE), 1));
     res->path = path;
     res->command = create_string();
@@ -72,6 +75,7 @@ void show(window* win){
             continue;
         }
         printw("%4d ", i + 1);
+        int cnt = 5;
         while(c != '\n' && c != EOF){
             if(L <= ind && ind <= R){
                 attron(COLOR_PAIR(win->highlight));
@@ -81,9 +85,11 @@ void show(window* win){
             else{
                 printw("%c", c);
             }
+            cnt++;
             c = fgetc(src);
             ind++;
         }
+        end -= cnt / getmaxx(stdscr);
         ind++;
         printw("\n");
         start++;
