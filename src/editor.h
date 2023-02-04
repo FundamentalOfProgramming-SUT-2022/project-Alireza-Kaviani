@@ -29,6 +29,7 @@ typedef struct{
 
 void init_window();
 window* create_window(string* path);
+void open_file(window* win, string* path);
 void show(window* win);
 char read_char(window* win);
 

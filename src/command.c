@@ -90,6 +90,10 @@ bool run_command(FILE* outf, window* win, command* cmd){
     if(!strcmp(cmd->name->s, "saveas")){
         return run_saveas(outf, win, cmd);
     }
+    if(!strcmp(cmd->name->s, "open")){
+        open_file(win, cmd->oth->v);
+        return false;
+    }
     return true;
 }
 

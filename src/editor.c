@@ -1,5 +1,6 @@
 #include "editor.h"
 #include "file.h"
+#include "undo.h"
 #include <stdlib.h>
 
 #include "modes/normal.h"
@@ -26,6 +27,20 @@ window* create_window(string* path){
     res->line = 0; res->pos = 0;
     res->issaved = true;
     return res;
+}
+
+void open_file(window* win, string* path){
+    save(win);
+    if(!file_exists(get_path(path, 0))){
+        create_file(path, 0);
+    }
+    copy_file(get_path(path, 0), get_path(char_to_str(OPENFILE), 1));
+    win->path = path;
+    win->command = create_string();
+    win->mode = NORMAL;
+    win->start = 0;
+    win->line = 0; win->pos = 0;
+    win->issaved = true;
 }
 
 void show(window* win){
