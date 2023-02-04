@@ -88,7 +88,6 @@ string* file_to_str(FILE* src){
 }
 
 int pos_to_index(FILE* src, int line, int pos){
-    line--;
     int idx = 0, L = 0, P = 0;
     char c;
     while((c = fgetc(src)) != EOF && (L < line || P < pos)){
@@ -111,7 +110,7 @@ bool command_to_pos(FILE* outf, command *cmd, int* res){
     int line, pos;
     sscanf(get_option(cmd, "--pos")->s, "%d:%d", &line, &pos);
     FILE* src = fopen(get_path(path, 0)->s, "r");
-    *res = pos_to_index(src, line, pos);
+    *res = pos_to_index(src, line - 1, pos);
     fclose(src);
     return false;
 }
@@ -159,6 +158,17 @@ vecstr* readlines(FILE* src){
             c = fgetc(src);
         }
         push_back(res, str);
+    }
+    return res;
+}
+
+string* get_filename(string* path){
+    string* res = create_string();
+    for(int i = 0; i < path->size; i++){
+        append(res, path->s[i]);
+        if(path->s[i] == '/'){
+            res = create_string();
+        }
     }
     return res;
 }

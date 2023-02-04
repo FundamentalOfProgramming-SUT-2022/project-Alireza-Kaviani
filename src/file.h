@@ -29,4 +29,6 @@ int get_word_index(string* path, int pos);
 
 vecstr* readlines(FILE* src);
 
+string* get_filename(string* path);
+
 #endif
