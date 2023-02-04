@@ -36,15 +36,9 @@ int main(){
     init_window();
     window* win = create_window(char_to_str("/root/guitest.c"));
     win->start = 5;
-    show(win);
+    win->line = 10;
 
-    while(1){
-        char c = getch();
-        append(win->command, c);
-        win->start++;
-        show(win);
-    }
-    getch();
+    mainloop(win);
     endwin();
 
     return 0;

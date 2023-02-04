@@ -1,6 +1,8 @@
 #include "editor.h"
 #include <stdlib.h>
 
+#include "modes/normal.h"
+
 char* mode_name[5] = {"NORMAL", "INSERT", "VISUAL", "FIND", "COMMAND"};
 
 void init_window(){
@@ -17,7 +19,7 @@ window* create_window(string* path){
     res->command = create_string();
     res->mode = NORMAL;
     res->start = 1;
-    res->curx = 0; res->cury = 0;
+    res->line = 0; res->pos = 0;
     res->issaved = true;
     return res;
 }
@@ -30,14 +32,14 @@ void show(window* win){
     char c;
     int start = win->start, end = start + getmaxy(stdscr) - 2;
     attron(COLOR_PAIR(COLOR_TEXT));
-    for(int i = 1; (c = fgetc(src)) != EOF; i++){
+    for(int i = 0; (c = fgetc(src)) != EOF; i++){
         if(i < start || end <= i){
             while(c != '\n' && c != EOF){
                 c = fgetc(src);
             }
             continue;
         }
-        printw("%4d ", i);
+        printw("%4d ", i + 1);
         while(c != '\n' && c != EOF){
             printw("%c", c);
             c = fgetc(src);
@@ -60,5 +62,41 @@ void show(window* win){
     
     printw("%s", win->command->s);
 
+    move(win->line - win->start, win->pos + 5);
+
     refresh();
+}
+
+char read_char(window* win){
+    show(win);
+    return getch();
+}
+
+void move_cursor(window* win, char c){
+    if(c == 'k'){
+        win->line--;
+    }
+    if(c == 'j'){
+        win->line++;
+    }
+    if(c == 'h'){
+        win->pos--;
+    }
+    if(c == 'l'){
+        win->pos++;
+    }
+    FILE* src = fopen(get_path(win->path, 0)->s, "r");
+    get_valid_pos(src, &win->line, &win->pos);
+    if(c == 'k' && win->line - win->start < 3 && win->start > 0){
+        win->start--;
+    }
+    if(c == 'j' && win->start + getmaxy(stdscr) - win->line < 6){
+        win->start++;
+    }
+}
+
+void mainloop(window* win){
+    while(1){
+        normal_mode(win);
+    }
 }

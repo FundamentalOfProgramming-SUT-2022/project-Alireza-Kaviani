@@ -22,7 +22,7 @@ typedef enum{
 typedef struct{
     string* path;
     string* command;
-    int start, curx , cury;
+    int start, line , pos;
     bool issaved;
     MODE mode;
 } window;
@@ -30,5 +30,9 @@ typedef struct{
 void init_window();
 window* create_window(string* path);
 void show(window* win);
+char read_char(window* win);
+
+void move_cursor(window* win, char c);
+void mainloop(window* win);
 
 #endif

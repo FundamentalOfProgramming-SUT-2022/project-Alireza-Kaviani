@@ -172,3 +172,25 @@ string* get_filename(string* path){
     }
     return res;
 }
+
+void get_valid_pos(FILE* src, int* line, int* pos){
+    char c;
+    int l = 0, p = 0;
+    for(l = 0; l < *line; l++){
+        do{
+            c = fgetc(src);
+        }
+        while(c != '\n' && c != EOF);
+        if(c == EOF){
+            break;
+        }
+    }
+    for(p = 0; p < *pos; p++){
+        c = fgetc(src);
+        if(c == '\n' || c == EOF){
+            break;
+        }
+    }
+    *line = l;
+    *pos = p;
+}

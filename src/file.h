@@ -26,9 +26,9 @@ bool command_to_pos(FILE* outf, command *cmd, int* res);
 bool command_to_range(FILE* outf, command *cmd, int* left, int* right);
 
 int get_word_index(string* path, int pos);
-
 vecstr* readlines(FILE* src);
 
 string* get_filename(string* path);
+void get_valid_pos(FILE* src, int* line, int* pos);
 
 #endif

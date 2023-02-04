@@ -1,7 +1,7 @@
 all: build run
 
 build:
-	gcc main.c src/*.c src/commands/*.c -o main.o -lm -lncurses
+	gcc main.c src/*.c src/commands/*.c src/modes/*.c -o main.o -lm -lncurses
 
 run:
 	./main.o
