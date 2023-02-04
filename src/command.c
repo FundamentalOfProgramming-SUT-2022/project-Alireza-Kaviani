@@ -46,27 +46,32 @@ bool run_command(FILE* outf, window* win, command* cmd){
         return run_createfile(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "insertstr")){
+        win->issaved = false;
         return run_insertstr(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "cat")){
         return run_cat(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "removestr")){
+        win->issaved = false;
         return run_removestr(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "copystr")){
         return run_copystr(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "cutstr")){
+        win->issaved = false;
         return run_cutstr(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "pastestr")){
+        win->issaved = false;
         return run_pastestr(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "find")){
         return run_find(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "replace")){
+        win->issaved = false;
         return run_replace(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "grep")){
@@ -76,6 +81,7 @@ bool run_command(FILE* outf, window* win, command* cmd){
         return run_undo(outf, win);
     }
     if(!strcmp(cmd->name->s, "auto-indent")){
+        win->issaved = false;
         return run_autoindent(outf, cmd);
     }
     if(!strcmp(cmd->name->s, "compare")){

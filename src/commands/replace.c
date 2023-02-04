@@ -36,9 +36,6 @@ bool replace(FILE* outf, string* path, string* expr, string* rep, int type){
 
 bool run_replace(FILE* outf, command* cmd){
     string* path = get_option(cmd, "--file");
-    if(check_file(outf, path)){
-        return true;
-    }
     string* expr = get_option(cmd, "--str1");
     string* rep = get_option(cmd, "--str2");
     int type = 1; // pos:at, -1:all
