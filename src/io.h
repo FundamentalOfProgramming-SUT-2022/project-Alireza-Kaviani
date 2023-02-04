@@ -7,6 +7,7 @@
 #include "editor.h"
 
 bool read_word(window* win, string* s);
+bool read_pattern(window* win, string* pattern);
 bool read_command(FILE* outf, window* win);
 
 #endif

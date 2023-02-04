@@ -16,14 +16,15 @@ typedef enum{
 typedef enum{
     COLOR_TEXT,
     COLOR_MODE,
-    COLOR_SELECTION
+    COLOR_SELECTION,
+    COLOR_FIND
 } COLOR;
 
 typedef struct{
     string* path;
     string* command;
     int start, line , pos;
-    int hl, hr;
+    int hl, hr, findat;
     bool issaved;
     MODE mode;
     COLOR highlight;

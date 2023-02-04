@@ -50,6 +50,11 @@ bool read_word(window* win, string* s){
     return true;
 }
 
+bool read_pattern(window* win, string* pattern){
+    flag = false;
+    return read_word(win, pattern);
+}
+
 bool read_command(FILE* outf, window* win){
     flag = false;
     string* s = create_string();

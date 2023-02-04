@@ -7,6 +7,7 @@
 #include "modes/insert.h"
 #include "modes/command.h"
 #include "modes/visual.h"
+#include "modes/find.h"
 
 char* mode_name[5] = {"NORMAL", "INSERT", "VISUAL", "FIND", "COMMAND"};
 
@@ -16,6 +17,7 @@ void init_window(){
     init_pair(COLOR_TEXT, COLOR_WHITE, COLOR_BLACK);
     init_pair(COLOR_MODE, COLOR_BLACK, COLOR_WHITE);
     init_pair(COLOR_SELECTION, COLOR_BLACK, COLOR_WHITE);
+    init_pair(COLOR_FIND, COLOR_BLACK, COLOR_YELLOW);
 }
 
 window* create_window(string* path){
@@ -27,7 +29,7 @@ window* create_window(string* path){
     res->start = 0;
     res->line = 0; res->pos = 0;
     res->issaved = true;
-    res->hl = -1; res->hr = -1;
+    res->hl = -1; res->hr = -1; res->findat = 1;
     res->highlight = COLOR_TEXT;
     return res;
 }
@@ -44,7 +46,7 @@ void open_file(window* win, string* path){
     win->start = 0;
     win->line = 0; win->pos = 0;
     win->issaved = true;
-    win->hl = -1; win->hr = -1;
+    win->hl = -1; win->hr = -1; win->findat = 1;
     win->highlight = COLOR_TEXT;
 }
 
@@ -147,6 +149,9 @@ void mainloop(window* win){
         }
         if(win->mode == VISUAL){
             visual_mode(win);
+        }
+        if(win->mode == FIND){
+            find_mode(win);
         }
     }
 }

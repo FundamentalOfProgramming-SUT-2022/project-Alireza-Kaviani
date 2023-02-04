@@ -3,42 +3,28 @@
 #include <limits.h>
 #include <stdlib.h>
 
-int get_index(string* path, int pos, int byword){
-    if(byword == 0) return pos + 1;
-    return get_word_index(path, pos);
-}
-
-bool find(FILE* outf, string* path, string* expr, int type, int byword){
+bool find(FILE* outf, string* path, string* expr, int type, int* l, int* r){
     int n = expr->size;
     pattern* ptrn = create_pattern(expr);
     reset(ptrn, 0);
-    FILE* src = fopen(get_path(path, 0)->s, "r");
+    FILE* src = fopen(get_path(path, 1)->s, "r");
     char c;
     bool flag = false;
     int prv = -1, cnt = 0;
+    *l = -1; *r = -1;
     for(int i = 0; (c = fgetc(src)) != EOF; i++){
         update(ptrn, c, i);
-        if(ptrn->dp[n] != INT_MAX){
-            int pos = get_index(path, ptrn->dp[n], byword);
+        int pos = ptrn->dp[n];
+        if(pos != INT_MAX){
             if(pos <= prv)  continue;
             cnt++;
-            if(cnt == type || type == -2){
-                if(flag){
-                    fprintf(outf, ", ");
-                }
-                fprintf(outf, "%d", pos);
-                flag = 1;
+            if(cnt == type){
+                *l = pos;
+                *r = i;
             }
             prv = pos;
         }
     }
-    if(type == -1){
-        fprintf(outf, "%d", cnt);
-    }
-    else if(flag == false){
-        fprintf(outf, "-1");
-    }
-    fprintf(outf, "\n");
     fclose(src);
     return false;
 }
@@ -59,7 +45,7 @@ bool run_find(FILE* outf, command* cmd){
     if(get_option(cmd, "-at")->size != 0){
         type = atoi(get_option(cmd, "-at")->s);
     }
-    int byword = (get_option(cmd, "-byword")->size != 0);
-    find(outf, path, expr, type, byword);
+    int byword = (get_option(cmd, "-byword")->size != 0), l = 0, r = 0;
+    find(outf, path, expr, type, &l, &r);
     return false;
 }

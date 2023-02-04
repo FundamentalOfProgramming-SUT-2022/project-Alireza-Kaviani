@@ -29,6 +29,8 @@ void normal_mode(window* win){
     if(c == '/'){
         append(win->command, '/');
         win->mode = FIND;
+        win->findat = 1;
+        win->highlight = COLOR_FIND;
         return;
     }
     if(c == '='){
