@@ -5,6 +5,8 @@
 #define HIDDEN      "./vimr/.vim"
 #define OUTPUT      "/root/output.vim"
 #define CLIPBOARD   "/root/clipboard.vim"
+#define OPENFILE    "/root/openfile.vim"
+#define TMPFILE     "/root/tmpfile.vim"
 
 #include <stdio.h>
 #include <stdbool.h>

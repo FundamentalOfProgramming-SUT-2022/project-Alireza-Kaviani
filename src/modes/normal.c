@@ -6,6 +6,10 @@ void normal_mode(window* win){
         move_cursor(win, c);
         return;
     }
+    if(c == 'i'){
+        win->mode = INSERT;
+        return;
+    }
     if(c == ':'){
         append(win->command, ':');
         win->mode = COMMAND;

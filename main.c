@@ -35,8 +35,6 @@ int main(){
 
     init_window();
     window* win = create_window(char_to_str("/root/guitest.c"));
-    win->start = 5;
-    win->line = 10;
 
     mainloop(win);
     endwin();

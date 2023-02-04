@@ -22,11 +22,11 @@ void save(string* path){
 }
 
 void get_src_dst(FILE** src, FILE** dst, string* path){
-    save(path);
-    string* hidden = get_path(path, 1);
-    append(hidden, '_'); append(hidden, '1');
-    *src = fopen(hidden->s, "r");
-    *dst = fopen(get_path(path, 0)->s, "w");
+    string* open = get_path(char_to_str(OPENFILE), 1);
+    string* tmp = get_path(char_to_str(TMPFILE), 1);
+    copy_file(open, tmp);
+    *src = fopen(tmp->s, "r");
+    *dst = fopen(open->s, "w");
 }
 
 void undo(string* path){

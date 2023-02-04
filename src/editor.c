@@ -1,7 +1,9 @@
 #include "editor.h"
+#include "file.h"
 #include <stdlib.h>
 
 #include "modes/normal.h"
+#include "modes/insert.h"
 
 char* mode_name[5] = {"NORMAL", "INSERT", "VISUAL", "FIND", "COMMAND"};
 
@@ -15,10 +17,11 @@ void init_window(){
 
 window* create_window(string* path){
     window* res = malloc(sizeof(window));
+    copy_file(get_path(path, 0), get_path(char_to_str(OPENFILE), 1));
     res->path = path;
     res->command = create_string();
     res->mode = NORMAL;
-    res->start = 1;
+    res->start = 0;
     res->line = 0; res->pos = 0;
     res->issaved = true;
     return res;
@@ -28,7 +31,7 @@ void show(window* win){
     string* filename = get_filename(win->path);
     clear();
     
-    FILE* src = fopen(get_path(win->path, 0)->s, "r");
+    FILE* src = fopen(get_path(char_to_str(OPENFILE), 1)->s, "r");
     char c;
     int start = win->start, end = start + getmaxy(stdscr) - 2;
     attron(COLOR_PAIR(COLOR_TEXT));
@@ -85,7 +88,7 @@ void move_cursor(window* win, char c){
     if(c == 'l'){
         win->pos++;
     }
-    FILE* src = fopen(get_path(win->path, 0)->s, "r");
+    FILE* src = fopen(get_path(char_to_str(OPENFILE), 1)->s, "r");
     get_valid_pos(src, &win->line, &win->pos);
     if(c == 'k' && win->line - win->start < 3 && win->start > 0){
         win->start--;
@@ -97,6 +100,11 @@ void move_cursor(window* win, char c){
 
 void mainloop(window* win){
     while(1){
-        normal_mode(win);
+        if(win->mode == NORMAL){
+            normal_mode(win);
+        }
+        if(win->mode == INSERT){
+            insert_mode(win);
+        }
     }
 }
