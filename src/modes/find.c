@@ -34,5 +34,7 @@ void find_mode(window* win){
     }
     else{
         win->findat++;
+        index_to_pos(get_path(char_to_str(OPENFILE), 1), win->hl, &win->line, &win->pos);
+        win->start = (win->line < 3 ? 0 : win->line - 3);
     }
 }

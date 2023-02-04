@@ -191,3 +191,20 @@ void get_valid_pos(FILE* src, int* line, int* pos){
     *line = l;
     *pos = p;
 }
+
+void index_to_pos(string* path, int index, int* line, int* pos){
+    FILE* src = fopen(path->s, "r");
+    int l = 0, p = 0; char c;
+    for(int i = 0; i < index; i++){
+        c = fgetc(src);
+        if(c == '\n'){
+            l++;
+            p = 0;
+        }
+        else{
+            p++;
+        }
+    }
+    *line = l;
+    *pos = p;
+}

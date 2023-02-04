@@ -32,5 +32,6 @@ vecstr* readlines(FILE* src);
 
 string* get_filename(string* path);
 void get_valid_pos(FILE* src, int* line, int* pos);
+void index_to_pos(string* path, int index, int* line, int* pos);
 
 #endif
