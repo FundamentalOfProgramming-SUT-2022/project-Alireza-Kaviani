@@ -6,6 +6,7 @@
 #include "modes/normal.h"
 #include "modes/insert.h"
 #include "modes/command.h"
+#include "modes/visual.h"
 
 char* mode_name[5] = {"NORMAL", "INSERT", "VISUAL", "FIND", "COMMAND"};
 
@@ -26,6 +27,8 @@ window* create_window(string* path){
     res->start = 0;
     res->line = 0; res->pos = 0;
     res->issaved = true;
+    res->hl = -1; res->hr = -1;
+    res->highlight = COLOR_TEXT;
     return res;
 }
 
@@ -41,28 +44,45 @@ void open_file(window* win, string* path){
     win->start = 0;
     win->line = 0; win->pos = 0;
     win->issaved = true;
+    win->hl = -1; win->hr = -1;
+    win->highlight = COLOR_TEXT;
 }
 
 void show(window* win){
     string* filename = get_filename(win->path);
     clear();
-    
+    int L = win->hl, R = win->hr;
+    if(L > R){
+        L ^= R; R ^= L; L ^= R;
+    }
+
     FILE* src = fopen(get_path(char_to_str(OPENFILE), 1)->s, "r");
     char c;
-    int start = win->start, end = start + getmaxy(stdscr) - 2;
+    int ind = 0, start = win->start, end = start + getmaxy(stdscr) - 2;
     attron(COLOR_PAIR(COLOR_TEXT));
     for(int i = 0; (c = fgetc(src)) != EOF; i++){
         if(i < start || end <= i){
             while(c != '\n' && c != EOF){
                 c = fgetc(src);
+                ind++;
             }
+            ind++;
             continue;
         }
         printw("%4d ", i + 1);
         while(c != '\n' && c != EOF){
-            printw("%c", c);
+            if(L <= ind && ind <= R){
+                attron(COLOR_PAIR(win->highlight));
+                printw("%c", c);
+                attroff(COLOR_PAIR(win->highlight));
+            }
+            else{
+                printw("%c", c);
+            }
             c = fgetc(src);
+            ind++;
         }
+        ind++;
         printw("\n");
         start++;
     }
@@ -124,6 +144,9 @@ void mainloop(window* win){
         }
         if(win->mode == COMMAND){
             command_mode(win);
+        }
+        if(win->mode == VISUAL){
+            visual_mode(win);
         }
     }
 }

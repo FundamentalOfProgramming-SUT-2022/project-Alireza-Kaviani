@@ -23,8 +23,10 @@ typedef struct{
     string* path;
     string* command;
     int start, line , pos;
+    int hl, hr;
     bool issaved;
     MODE mode;
+    COLOR highlight;
 } window;
 
 void init_window();

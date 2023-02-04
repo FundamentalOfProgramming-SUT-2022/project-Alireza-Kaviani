@@ -12,6 +12,14 @@ void normal_mode(window* win){
         win->mode = INSERT;
         return;
     }
+    if(c == 'v'){
+        win->mode = VISUAL;
+        win->highlight = COLOR_SELECTION;
+        FILE* src = fopen(get_path(char_to_str(OPENFILE), 1)->s, "r");
+        win->hl = win->hr = pos_to_index(src, win->line, win->pos);
+        fclose(src);
+        return;
+    }
     if(c == ':'){
         append(win->command, ':');
         win->mode = COMMAND;
