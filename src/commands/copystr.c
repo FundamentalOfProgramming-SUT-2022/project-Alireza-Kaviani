@@ -1,7 +1,7 @@
 #include "copystr.h"
 
 bool copystr(FILE* outf, string* path, int left, int right){
-    FILE* src = fopen(get_path(path, 0)->s, "r");
+    FILE* src = fopen(get_path(path, 1)->s, "r");
     FILE* dst = fopen(get_path(char_to_str(CLIPBOARD), 1)->s, "w");
     print_range(dst, src, left, right);
     fclose(src);

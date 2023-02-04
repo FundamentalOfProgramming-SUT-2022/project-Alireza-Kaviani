@@ -104,12 +104,9 @@ int pos_to_index(FILE* src, int line, int pos){
 
 bool command_to_pos(FILE* outf, command *cmd, int* res){
     string* path = get_option(cmd, "--file");
-    if(check_file(outf, path)){
-        return true;
-    }
     int line, pos;
     sscanf(get_option(cmd, "--pos")->s, "%d:%d", &line, &pos);
-    FILE* src = fopen(get_path(path, 0)->s, "r");
+    FILE* src = fopen(get_path(path, 1)->s, "r");
     *res = pos_to_index(src, line - 1, pos);
     fclose(src);
     return false;
