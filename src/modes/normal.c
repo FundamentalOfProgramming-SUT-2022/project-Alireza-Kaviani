@@ -7,7 +7,7 @@ void normal_mode(window* win){
         move_cursor(win, c);
         return;
     }
-    if(c == 'i'){
+    if(c == 'i' || c == 'a'){
         win->mode = INSERT;
         return;
     }

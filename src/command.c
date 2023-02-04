@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "file.h"
+
 #include "commands/createfile.h"
 #include "commands/insertstr.h"
 #include "commands/cat.h"
@@ -23,6 +25,8 @@ command* create_command(){
     cmd->opt = create_vecstr();
     cmd->val = create_vecstr();
     cmd->oth = create_vecstr();
+    push_back(cmd->opt, char_to_str("--file"));
+    push_back(cmd->val, char_to_str(OPENFILE));
     return cmd;
 }
 

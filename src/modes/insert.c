@@ -3,6 +3,10 @@
 
 void insert_mode(window* win){
     char c = read_char(win);
+    if(c == 27){
+        win->mode = NORMAL;
+        return;
+    }
     string* str = create_string();
     append(str, c);
     FILE* src = fopen(get_path(char_to_str(OPENFILE), 1)->s, "r");

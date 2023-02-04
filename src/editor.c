@@ -4,6 +4,7 @@
 
 #include "modes/normal.h"
 #include "modes/insert.h"
+#include "modes/command.h"
 
 char* mode_name[5] = {"NORMAL", "INSERT", "VISUAL", "FIND", "COMMAND"};
 
@@ -105,6 +106,9 @@ void mainloop(window* win){
         }
         if(win->mode == INSERT){
             insert_mode(win);
+        }
+        if(win->mode == COMMAND){
+            command_mode(win);
         }
     }
 }
